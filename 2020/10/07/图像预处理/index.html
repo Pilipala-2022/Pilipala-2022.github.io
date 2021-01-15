@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>图像预处理 | 谢昊璋的博客</title><meta name="description" content="图像显示与存储原理颜色空间&amp;emsp;&amp;emsp;1.RGB颜色空间&amp;emsp;&amp;emsp;(1).加法混色：越叠加越白&amp;emsp;&amp;emsp;(2).三个通道：Red、Green、Blue&amp;emsp;&amp;emsp;(3).一个像素颜色值（b, g, r）&amp;emsp;&amp;emsp;(4).取值范围 [0, 255]、 [0.0, 1.0] &amp;emsp;&amp;emsp;2.CMY(K)颜色空间&amp;emsp;&amp;"><meta name="keywords" content="笔记"><meta name="author" content="谢昊璋"><meta name="copyright" content="谢昊璋"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2020/10/07/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><meta property="og:type" content="article"><meta property="og:title" content="图像预处理"><meta property="og:url" content="http://yoursite.com/2020/10/07/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/"><meta property="og:site_name" content="谢昊璋的博客"><meta property="og:description" content="图像显示与存储原理颜色空间&amp;emsp;&amp;emsp;1.RGB颜色空间&amp;emsp;&amp;emsp;(1).加法混色：越叠加越白&amp;emsp;&amp;emsp;(2).三个通道：Red、Green、Blue&amp;emsp;&amp;emsp;(3).一个像素颜色值（b, g, r）&amp;emsp;&amp;emsp;(4).取值范围 [0, 255]、 [0.0, 1.0] &amp;emsp;&amp;emsp;2.CMY(K)颜色空间&amp;emsp;&amp;"><meta property="og:image" content="http://yoursite.com/person/1.jpg"><meta property="article:published_time" content="2020-10-07T14:17:55.000Z"><meta property="article:modified_time" content="2020-10-11T01:33:15.616Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-10-11 09:33:15'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 5.1.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">8</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">2</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E4%B8%8E%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">图像显示与存储原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E7%A9%BA%E9%97%B4"><span class="toc-number">1.1.</span> <span class="toc-text">颜色空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">图像存储原理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA%E7%9A%84%E7%9B%AE%E6%A0%87"><span class="toc-number">2.</span> <span class="toc-text">图像增强的目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%82%B9%E8%BF%90%E7%AE%97%EF%BC%9A%E5%9F%BA%E4%BA%8E%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%9A%84%E5%AF%B9%E6%AF%94%E5%A2%9E%E5%BC%BA"><span class="toc-number">3.</span> <span class="toc-text">点运算：基于直方图的对比增强</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96"><span class="toc-number">3.1.</span> <span class="toc-text">直方图均衡化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E9%80%82%E5%BA%94%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1"><span class="toc-number">3.2.</span> <span class="toc-text">自适应直方图均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94%E5%BA%A6%E5%8F%97%E9%99%90%E7%9A%84%E8%87%AA%E9%80%82%E5%BA%94%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96"><span class="toc-number">3.3.</span> <span class="toc-text">对比度受限的自适应直方图均衡化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BD%A2%E6%80%81%E5%AD%A6%E5%A4%84%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">形态学处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E5%9F%9F%E5%A4%84%E7%90%86%E5%8F%8A%E5%85%B6%E5%8F%98%E6%8D%A2"><span class="toc-number">5.</span> <span class="toc-text">空间域处理及其变换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%A4%E6%B3%A2-%E5%8D%B7%E7%A7%AF"><span class="toc-number">5.1.</span> <span class="toc-text">滤波&#x2F;卷积</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%91%E7%8E%87%E5%9F%9F%E5%A4%84%E7%90%86%EF%BC%9A%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E3%80%81-%E5%B0%8F%E6%B3%A2%E5%8F%98%E6%8D%A2"><span class="toc-number">6.</span> <span class="toc-text">频率域处理：傅里叶变换、 小波变换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2"><span class="toc-number">6.1.</span> <span class="toc-text">傅里叶变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E6%B3%A2%E5%8F%98%E6%8D%A2"><span class="toc-number">6.2.</span> <span class="toc-text">小波变换</span></a></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(/person/1.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">谢昊璋的博客</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">图像预处理</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-10-07T14:17:55.000Z" title="发表于 2020-10-07 22:17:55">2020-10-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-10-11T01:33:15.616Z" title="更新于 2020-10-11 09:33:15">2020-10-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="meta-secondline"> </div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="图像显示与存储原理"><a href="#图像显示与存储原理" class="headerlink" title="图像显示与存储原理"></a>图像显示与存储原理</h1><h2 id="颜色空间"><a href="#颜色空间" class="headerlink" title="颜色空间"></a><strong>颜色空间</strong></h2><p>&emsp;&emsp;<font size=5><em>1.RGB颜色空间</em></font><br>&emsp;&emsp;<font size=4><em>(1).加法混色：越叠加越白</em></font><br>&emsp;&emsp;<font size=4><em>(2).三个通道：Red、Green、Blue</em></font><br>&emsp;&emsp;<font size=4><em>(3).一个像素颜色值（b, g, r）</em></font><br>&emsp;&emsp;<font size=4><em>(4).取值范围 [0, 255]、 [0.0, 1.0]</em></font></p>
+<p>&emsp;&emsp;<font size=5><em>2.CMY(K)颜色空间</em></font><br>&emsp;&emsp;<font size=4><em>(1).减法混色：越叠加越黑</em></font><br>&emsp;&emsp;<font size=4><em>(2).四个通道：Cyan、Magenta、Yellow、Key</em></font><br>&emsp;&emsp;<font size=4><em>(3).一个像素颜色值 (c, m, y, k)</em></font><br>&emsp;&emsp;<font size=4><em>(4).取值范围 [0, 255]、 [0.0, 1.0]</em></font></p>
+<p>&emsp;&emsp;<font size=5><em>3.HSV颜色空间</em></font><br>&emsp;&emsp;<font size=4><em>(1).三个要素</em></font><br>&emsp;&emsp;<font size=4><em>&emsp;&emsp;H/Hue: 色调，颜色种类</em></font><br>&emsp;&emsp;<font size=4><em>&emsp;&emsp;H/S/Saturation: 饱和度，颜色的纯度</em></font><br>&emsp;&emsp;<font size=4><em>&emsp;&emsp;V/Value: 明度，颜色明亮度</em></font><br>&emsp;&emsp;<font size=4><em>(2).一个像素颜色值 (h, v, s)</em></font><br>&emsp;&emsp;<font size=4><em>(3).取值范围 [0, 255]、 [0.0, 1.0]</em></font></p>
+<p>&emsp;&emsp;<font size=5><em>4.CIE-XYZ颜色空间</em></font><br>&emsp;&emsp;<font size=4><em>(1).基于人类颜色视觉的直接测定，是其他颜色空间的基础</em></font><br>&emsp;&emsp;<font size=4><em>(2).人类视觉系统-视锥细胞</em></font><br>&emsp;&emsp;<font size=4><em>&emsp;&emsp;短波 (S, 420-440nm)</em></font><br>&emsp;&emsp;<font size=4><em>&emsp;&emsp;中波 (M, 530-540nm)</em></font><br>&emsp;&emsp;<font size=4><em>&emsp;&emsp;长波 (L, 560-580nm)</em></font><br>&emsp;&emsp;<font size=4><em>(3).三色刺激性通道：X、Y、Z约略对应于红色、绿色、蓝色，一种波的刺激等于几种波的混合刺激</em></font></p>
+<h2 id="图像存储原理"><a href="#图像存储原理" class="headerlink" title="图像存储原理"></a><strong>图像存储原理</strong></h2><p>&emsp;&emsp;<font size=5><em>1.主流颜色空间</em></font><br>&emsp;&emsp;<font sizr=4><em>(1) RGB三通道彩色图</em></font><br>&emsp;&emsp;<font sizr=4><em>(2) 单通道灰度图</em></font><br>&emsp;&emsp;<font sizr=4>&emsp;&emsp;<em>Gray = R</em>0.3 + G<em>0.59 + B</em>0.11*</font><br>&emsp;&emsp;<font size=5><em>2.常见的存储格式.</em></font><br>&emsp;&emsp;<font sizr=4>&emsp;&emsp;<em>bmp、jpg、png、tiff、gif、pcx、tag、exif、fpx、svag、psd、cdr、pcd、cdr、pcd、dxf、ufo、eps、ai、raw、WMF、webp</em></font></p>
+<h1 id="图像增强的目标"><a href="#图像增强的目标" class="headerlink" title="图像增强的目标"></a>图像增强的目标</h1><p>&emsp;&emsp;<font size=5><em>1.改善图像的视觉效果</em></font></p>
+<p>&emsp;&emsp;<font size=5><em>2.转换为更适合人或者机器分析处理的形式</em></font></p>
+<p>&emsp;&emsp;<font size=5><em>3.突出对人或机器分析有意义的信息</em></font></p>
+<p>&emsp;&emsp;<font size=5><em>4.抑制无用信息，提高图像的使用价值</em></font></p>
+<h1 id="点运算：基于直方图的对比增强"><a href="#点运算：基于直方图的对比增强" class="headerlink" title="点运算：基于直方图的对比增强"></a>点运算：基于直方图的对比增强</h1><h2 id="直方图均衡化"><a href="#直方图均衡化" class="headerlink" title="直方图均衡化"></a>直方图均衡化</h2><p>&emsp;&emsp;<font size=4><strong>直方图均衡化是指利用图像直方图对对比度进行调整的方法。直方图均衡化通常用来增加许多图像的局部对比度，尤其是当图片的有用数据的对比度相当接近的时候。直方图均衡化之后，亮度可以更好地在直方图对上分布。这样就可以用于增强局部对比度而不影响整体对比度，直方图均衡化通过有效地扩展常用的亮度来实现这种功能。</strong></font><br>&emsp;&emsp;<font size=4><strong>直方图均衡化实际上是对图像进行非线性拉伸，重新分配各个灰度单位中像素的数量，使一定灰度范围像素点数量的值大致相等。</strong></font></p>
+<h2 id="自适应直方图均衡"><a href="#自适应直方图均衡" class="headerlink" title="自适应直方图均衡"></a>自适应直方图均衡</h2><p>&emsp;&emsp;<font size=4><strong>直方图均衡的经典算法对整幅图像的像素使用相同的变换，如果图像中包括明显亮的或者暗的区域，则经典算法作用有限</strong></font><br>&emsp;&emsp;<font size=4><strong>自适应直方图均衡（AHE）算法通过对局部区域进行直方图的均衡来解决上述问题。AHE会让移动模板在原始图片上按特定步长活动，每次移动后模板区域内做直方图均衡，映射后的结果赋值给模板区域内的所有点。每个店会有多次赋值，最终值为这些赋值的均值。</strong></font></p>
+<h2 id="对比度受限的自适应直方图均衡化"><a href="#对比度受限的自适应直方图均衡化" class="headerlink" title="对比度受限的自适应直方图均衡化"></a>对比度受限的自适应直方图均衡化</h2><p>&emsp;&emsp;<font size=4><strong>AHE会过度放大图像中相对均匀区域的噪音，可采用限制对比度自适应直方图均衡化（CLAHE）。与普通的自适应直方图均衡相比，CLAHE的不同之处在于直方图修剪的过程中，用修剪后的直方图均衡图像时，图像对比度会更自然。</strong></font></p>
+<h1 id="形态学处理"><a href="#形态学处理" class="headerlink" title="形态学处理"></a>形态学处理</h1><p>&emsp;&emsp;<font size=5><strong>通常有噪声的图像用阈值二值化后，所得到的边界是很不平滑的，物体区域具有一些错判的孔洞，背景区域散布一些小的噪声物体，连续的开和闭运算可以显著的改善这种情况。</strong></font><br>&emsp;&emsp;<font size=4><strong>1.膨胀是图像中的高亮部分进行膨胀，类似于领域扩张。</strong></font><br>&emsp;&emsp;<font size=4><strong>2.服饰是原图的高亮部分被腐蚀，类似于领域被蚕食。</strong></font><br>&emsp;&emsp;<font size=4><strong>3.开运算是先腐蚀再膨胀，可以去掉目标外的孤立点。</strong></font><br>&emsp;&emsp;<font size=4><strong>4.闭运算是先膨胀再腐蚀，可以去掉目标内的孔。</strong></font></p>
+<h1 id="空间域处理及其变换"><a href="#空间域处理及其变换" class="headerlink" title="空间域处理及其变换"></a>空间域处理及其变换</h1><h2 id="滤波-卷积"><a href="#滤波-卷积" class="headerlink" title="滤波/卷积"></a>滤波/卷积</h2><p>&emsp;&emsp;<font size=4><strong>1.均值滤波本身存在缺陷，既没有很好地去除噪声点，也破坏了图像的细节反而使图像变得模糊。</strong></font><br>&emsp;&emsp;<font size=4><strong>2.中值滤波能够有效地去除椒盐噪声</strong></font><br>&emsp;&emsp;<font size=4><strong>3.高斯滤波模拟人眼，关注中心区域，能够有效地去除高斯噪声。</strong></font></p>
+<h1 id="频率域处理：傅里叶变换、-小波变换"><a href="#频率域处理：傅里叶变换、-小波变换" class="headerlink" title="频率域处理：傅里叶变换、 小波变换"></a>频率域处理：傅里叶变换、 小波变换</h1><h2 id="傅里叶变换"><a href="#傅里叶变换" class="headerlink" title="傅里叶变换"></a>傅里叶变换</h2><p>&emsp;&emsp;<font size=5><strong>一个信号可以有足够多个不同频率和赋值的正余弦波组成</strong></font></p>
+<h2 id="小波变换"><a href="#小波变换" class="headerlink" title="小波变换"></a>小波变换</h2><p>&emsp;&emsp;<font size=5><strong>小波变换要做的就是将原始信号表示为一组小波基的线性组合，然后通过忽略其中不重要的部分达到数据压缩（即降维）的目的。</strong></font><br>&emsp;&emsp;<font size=5><strong>所谓“小波函数”是一族函数，需要满足均值为0和在时间域、频域都局部化这两个条件。小波函数有很多种类，最简单的是Haar小波。</strong></font></p>
+</div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></div><div class="post_share"><div class="social-share" data-image="/person/1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/10/10/%E5%9B%BE%E5%83%8F%E7%89%B9%E5%BE%81%E4%B8%8E%E6%8F%8F%E8%BF%B0/"><img class="prev-cover" data-lazy-src="/person/5.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">图像特征与描述</div></div></a></div><div class="next-post pull-right"><a href="/2020/09/02/C++%E4%B8%ADresize%E5%87%BD%E6%95%B0%E5%9C%A8vector%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/"><img class="next-cover" data-lazy-src="https://images.wallpaperscraft.com/image/nameplate_inscription_discovered_119069_1280x720.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++中resize函数在vector中的使用</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/10/10/图像特征与描述/" title="图像特征与描述"><img class="relatedPosts_cover" data-lazy-src="/person/5.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-10-10</div><div class="relatedPosts_title">图像特征与描述</div></div></a></div><div class="relatedPosts_item"><a href="/2020/08/30/引用/" title="引用(Reference)"><img class="relatedPosts_cover" data-lazy-src="/person/cover1.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-30</div><div class="relatedPosts_title">引用(Reference)</div></div></a></div><div class="relatedPosts_item"><a href="/2020/10/11/未有深度学习之前/" title="未有深度学习之前"><img class="relatedPosts_cover" data-lazy-src="/person/4.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-10-11</div><div class="relatedPosts_title">未有深度学习之前</div></div></a></div><div class="relatedPosts_item"><a href="/2020/10/12/深度学习与误差反向传播算法/" title="深度学习与误差反向传播算法"><img class="relatedPosts_cover" data-lazy-src="/person/6.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-10-12</div><div class="relatedPosts_title">深度学习与误差反向传播算法</div></div></a></div><div class="relatedPosts_item"><a href="/2020/10/16/目标检测/" title="目标检测"><img class="relatedPosts_cover" data-lazy-src="/person/9.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-10-16</div><div class="relatedPosts_title">目标检测</div></div></a></div></div></div></article></main><footer id="footer" style="background-image: url(/person/1.jpg)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 谢昊璋</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script></div></body></html>

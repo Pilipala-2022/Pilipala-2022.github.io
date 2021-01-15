@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>谢昊璋的博客</title><meta name="description"><meta name="author" content="谢昊璋"><meta name="copyright" content="谢昊璋"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><meta property="og:type" content="website"><meta property="og:title" content="谢昊璋的博客"><meta property="og:url" content="http://yoursite.com/"><meta property="og:site_name" content="谢昊璋的博客"><meta property="og:description"><meta property="og:image" content="http://yoursite.com/img/avatar.png"><meta property="article:published_time" content="2021-01-15T09:31:54.507Z"><meta property="article:modified_time" content="2021-01-15T09:31:54.507Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2021-01-15 17:31:54'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 5.1.1"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">8</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">2</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/index_img2.png)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">谢昊璋的博客</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="site-info"><h1 id="site_title">谢昊璋的博客</h1><div id="site_subtitle"><span id="subtitle"></span></div></div><div id="scroll_down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout_page" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/12/10/%E6%B5%8B%E8%B7%9D/" title="一路大创，一路惨淡">     <img class="post_bg" data-lazy-src="/person/%E5%A4%A7%E5%88%9B.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一路大创，一路惨淡"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/10/%E6%B5%8B%E8%B7%9D/" title="一路大创，一路惨淡">一路大创，一路惨淡</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-12-10T12:30:25.000Z" title="发表于 2020-12-10 20:30:25">2020-12-10</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E9%9A%99%E7%A2%8E%E7%AC%94/">学隙碎笔</a></span></div><div class="content">树莓派安装*****操作系统使用OpenCV调用树莓派原装SCI摄像头换源使用百度AI平台EasyDL模型检测物体PNP解算获取相机位姿关系
+&emsp;&emsp;百度AI平台的EasyDL物体检测模型返回的两个坐标点(矩形框左上和右下)是范围在0~1的四个长宽比例值。
+
+
+
+x1 * 图片宽度 = 检测框左上角的横坐标y1 * 图片高度 = 检测框左上角的纵坐标x2 * 图片宽度 = 检测框右下角的横坐标y2 * 图片高度 = 检测框右下角的纵坐标
+
+&emsp;&emsp;若使用光轴垂直水平平面的固定摄像头拍摄物体时(结构类似于菜鸟驿站的高拍仪)，可以测量确定一张图片的长度与宽度在现实世界中对应的长度，深度信息同样可以测量得到。这样只需要经过简单的加减运算就可以得到待测物体在相机坐标系下的三维坐标。通过一定的计算同样可以得到以云台为原点的世界坐标系。不考虑它外观的话，这种方式还是非常适合用来作比赛的。&emsp;&emsp;关于世界坐标系和相机坐标系简单说一说我的理解也就是它在本文中的含义。相机坐标系就是跟相机有关的坐标系，因为相机位置可以随时发生变化，所以用相机坐标系来描述物体 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/10/16/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" title="目标检测">     <img class="post_bg" data-lazy-src="/person/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="目标检测"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/10/16/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" title="目标检测">目标检测</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-10-16T13:27:01.000Z" title="发表于 2020-10-16 21:27:01">2020-10-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content"></div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/10/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%AF%E5%B7%AE%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/" title="深度学习与误差反向传播算法">     <img class="post_bg" data-lazy-src="/person/6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="深度学习与误差反向传播算法"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/10/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%AF%AF%E5%B7%AE%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/" title="深度学习与误差反向传播算法">深度学习与误差反向传播算法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-10-12T13:39:40.000Z" title="发表于 2020-10-12 21:39:40">2020-10-12</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content">神经网络神经元前馈网络梯度下降误差反向传播应用案例可以手算的神经网络示例BP神经网络的实现从神经网络到深度学习</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/10/11/%E6%9C%AA%E6%9C%89%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%89%8D/" title="未有深度学习之前">     <img class="post_bg" data-lazy-src="/person/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="未有深度学习之前"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/10/11/%E6%9C%AA%E6%9C%89%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%89%8D/" title="未有深度学习之前">未有深度学习之前</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-10-11T01:28:53.000Z" title="发表于 2020-10-11 09:28:53">2020-10-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content">图像分割&emsp;&emsp;经典的数字图像分割算法一般是基于灰度值的两个基本特征之一：不连续性和相似性
+基于阈值的分割方法&emsp;&emsp;阈值法的基本思想是基于图像的灰度特征来计算一个或多个灰度阈值，并将图像中每个像素的灰度值与阈值相比较，最后将像素根据比较的结果分到合适的类别中。&emsp;&emsp;阈值法设定某一灰度阈值T，能将图片分成两部分：大于T的像素群和小于T的像素群。一个合适的阈值可以很好地将图像分割开来。
+基于边缘的分割方法&emsp;&emsp; 所谓边缘是指图像中两个不同区域的边界线上连续的像素点的集合，是图像局部特征不连续性的反映，体现了灰度、颜色、纹理等图像特性的突变。&emsp;&emsp;基于边缘检测的图像分割方法的基本思路是先确定图像中的边缘像素，然后再把这些像素连接在一起就构成了所需的区域边界。
+基于区域的分割方法&emsp;&emsp;此类方法是将图像按照相似性准则分成不同的区域，主要包括种子区域生长法、区域分类合并法和分水岭算法等几种类型。
+区域生长法&emsp;&emsp;区域生长是根据一种事先定义的准则将像素或者子区域聚合成更大区域的 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/10/10/%E5%9B%BE%E5%83%8F%E7%89%B9%E5%BE%81%E4%B8%8E%E6%8F%8F%E8%BF%B0/" title="图像特征与描述">     <img class="post_bg" data-lazy-src="/person/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="图像特征与描述"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/10/10/%E5%9B%BE%E5%83%8F%E7%89%B9%E5%BE%81%E4%B8%8E%E6%8F%8F%E8%BF%B0/" title="图像特征与描述">图像特征与描述</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-10-10T07:17:16.000Z" title="发表于 2020-10-10 15:17:16">2020-10-10</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content">颜色特征量化颜色直方图&emsp;&emsp;1.最常用的方法是将颜色空间的各个分量（维度）均匀地进行划分。&emsp;&emsp;2.适用颜色空间: RGB、HSV等颜色空间&emsp;&emsp;3.操作：&emsp;&emsp;&emsp;&emsp;(1)颜色空间量化，单元（bin）由单元中心代表&emsp;&emsp;&emsp;&emsp;(2)统计落在量化2单元上的像素数量
+聚类颜色直方图&emsp;&emsp;1.聚类算法则考虑到图像颜色特征在整个空间的分布情况，避免出现大量的bin中的像素非常稀疏的情况&emsp;&emsp;2.适用颜色空间: Lab等颜色空间&emsp;&emsp;3.操作：&emsp;&emsp;&emsp;&emsp;(1)使用聚类算法对所有像素点颜色向量进行聚类&emsp;&emsp;&emsp;&emsp;(2)单元（bin）由聚类中心代表
+几何特征边缘（Edge）&emsp;&emsp;1.像素明显变化的区域&emsp;&emsp;2.具有丰富的语义信息&emsp;&emsp;3.用于物体识别，几何、视角变换&emsp;&emsp;4.边 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/10/07/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" title="图像预处理">     <img class="post_bg" data-lazy-src="/person/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="图像预处理"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/10/07/%E5%9B%BE%E5%83%8F%E9%A2%84%E5%A4%84%E7%90%86/" title="图像预处理">图像预处理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-10-07T14:17:55.000Z" title="发表于 2020-10-07 22:17:55">2020-10-07</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="content">图像显示与存储原理颜色空间&emsp;&emsp;1.RGB颜色空间&emsp;&emsp;(1).加法混色：越叠加越白&emsp;&emsp;(2).三个通道：Red、Green、Blue&emsp;&emsp;(3).一个像素颜色值（b, g, r）&emsp;&emsp;(4).取值范围 [0, 255]、 [0.0, 1.0]
+&emsp;&emsp;2.CMY(K)颜色空间&emsp;&emsp;(1).减法混色：越叠加越黑&emsp;&emsp;(2).四个通道：Cyan、Magenta、Yellow、Key&emsp;&emsp;(3).一个像素颜色值 (c, m, y, k)&emsp;&emsp;(4).取值范围 [0, 255]、 [0.0, 1.0]
+&emsp;&emsp;3.HSV颜色空间&emsp;&emsp;(1).三个要素&emsp;&emsp;&emsp;&emsp;H/Hue: 色调，颜色种类&emsp;&emsp;&emsp;&emsp;H/S/Saturation: 饱和度，颜色的纯度&emsp;&emsp;&emsp;&emsp;V/Value ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2020/09/02/C++%E4%B8%ADresize%E5%87%BD%E6%95%B0%E5%9C%A8vector%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" title="C++中resize函数在vector中的使用">     <img class="post_bg" data-lazy-src="https://images.wallpaperscraft.com/image/nameplate_inscription_discovered_119069_1280x720.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C++中resize函数在vector中的使用"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/09/02/C++%E4%B8%ADresize%E5%87%BD%E6%95%B0%E5%9C%A8vector%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" title="C++中resize函数在vector中的使用">C++中resize函数在vector中的使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-09-02T06:29:13.000Z" title="发表于 2020-09-02 14:29:13">2020-09-02</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span></div><div class="content">&emsp;&emsp;在C++中typeid函数用于查看表达式的类型信息，包含在头文件 typeinfo 中。resize可以根据一个vector容器的大小为另一个容器开辟空间
+#include&lt;iostream&gt;#include&lt;typeinfo&gt;#include&lt;opencv2/opencv.hpp&gt;int main()&#123;    std::vector&lt;int&gt; layer_neuron_num = &#123; 400,80,2 &#125;;	std::vector&lt;cv::Mat&gt; layer;    // layer中包含三个Mat类型的数据	layer.resize(layer_neuron_num.size()); 	std::cout &lt;&lt; &quot;typeid(layer_neuron_num).name() = &quot; &lt;&lt; typeid(layer_neuron_num).name() &lt;&lt; std::endl;	std::cout &lt;&l ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2020/08/30/%E5%BC%95%E7%94%A8/" title="引用(Reference)">     <img class="post_bg" data-lazy-src="/person/cover1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="引用(Reference)"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/08/30/%E5%BC%95%E7%94%A8/" title="引用(Reference)">引用(Reference)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-08-30T08:31:12.000Z" title="发表于 2020-08-30 16:31:12">2020-08-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/C/">C++</a></span></div><div class="content">1.引用即别名&emsp;&emsp;引用并非对象，相反地，它只是为一个已经存在的对象所起的另一个名字。定义了一个引用以后，对其进行的所有操作都是在与之绑定的对象上进行的。
+2.引用和指针&emsp;&emsp;引用的本质是指针，引用是C++对裸露的内存地址（指针）做的包装。
+1. 可以定义指针的引用，但不能定义引用的引用
+
+指针的引用 ：rpa 绑定的是一个地址。
+
+int a = 100;int *pa = &amp;a;int * &amp;rpa = pa;
+
+引用的引用 ：与指针不同的是，引用没有二级引用，也就是说引用int&amp;类型对象的对象也是int&amp;类型。
+
+int a = 100;int &amp;b = a;// int &amp;&amp; c = a;  //errorint &amp; c = a;  //ok
+2. 可以定义指针的指针，但不能定义引用的指针
+
+指针的指针 ：指向指针的指针也就是二级指针，在C++中这是合法的。
+
+int a = 100;int * pa = &amp;a;int **ppa = &amp;pa; 
+
+
+引用的指针  ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">谢昊璋</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives"><div class="headline">文章</div><div class="length_num">8</div></a></div><div class="card-info-data-item is-center">      <a href="/tags"><div class="headline">标签</div><div class="length_num">2</div></a></div><div class="card-info-data-item is-center"><a href="/categories"><div class="headline">分类</div><div class="length_num">4</div></a></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>分类</span></div><ul class="card-category-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E9%9A%99%E7%A2%8E%E7%AC%94/"><span class="card-category-list-name">学隙碎笔</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">深度学习</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/"><span class="card-category-list-name">随笔</span><span class="card-category-list-count">1</span></a></li>
+                       
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href='/tags/Linux/' style='font-size:21px; color:rgb(99, 9, 165)'>Linux</a><a href='/tags/%E7%AC%94%E8%AE%B0/' style='font-size:18px; color:rgb(116, 123, 145)'>笔记</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">十二月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">1</span></a></li></ul></div></div></div></main><footer id="footer" style="background-image: url(/img/index_img2.png)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 谢昊璋</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    var typed = new Typed("#subtitle", {
+      strings: "怕什么真理无穷&#44;进一寸有一寸的欢喜".split(","),
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = '怕什么真理无穷&#44;进一寸有一寸的欢喜'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') subtitleType()
+  else $.getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js', subtitleType)
+} else {
+  subtitleType()
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script></div></body></html>
